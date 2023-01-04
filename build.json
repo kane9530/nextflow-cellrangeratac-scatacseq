@@ -1,0 +1,8 @@
+{
+    "main": "scatacseq",
+    "display_name": "Scatacseq",
+    "input_key": "scatacseq.designMatrices",
+    "source": "s3://gedac-bucket-dev/workflows/dev/scatacseq.wdl",
+    "modules": "s3://gedac-bucket-dev/workflows/dev/scatacseq.zip",
+    "sample": "s3://gedac-bucket-dev/tests/scatacseq/samples.zip"
+}

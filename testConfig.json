@@ -1,0 +1,8 @@
+{
+    "protocol": "http",
+    "modules": "modules.zip",
+    "server": "0.0.0.0:7098",
+    "block": true,
+    "tests": [
+    ]
+}
