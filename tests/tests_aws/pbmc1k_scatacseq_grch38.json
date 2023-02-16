@@ -18,7 +18,9 @@
         ],
       "sampleName": "pbmc",
       "sampleType": "1k_full",
-      "cols":{}
+      "cols":{
+        "batch": "0"
+      }
       }
     ]
 }
