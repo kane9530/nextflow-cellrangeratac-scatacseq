@@ -1,9 +1,11 @@
 {
     "scatacseq.uuid": "",
     "scatacseq.dockerBase": "026171442599.dkr.ecr.ap-southeast-1.amazonaws.com/",
-    "scatacseq.dockerPrefix": "humangrch38",
-    "scatacseq.designMatrices": [
-        [
+    "scatacseq.genomeVersion": "grch38",
+    "scatacseq.species": "human",
+    "scatacseq.designMatrices": 
+    [{
+      "fastqs":[[
             "s3://gedac-bucket-dev/input/scatacseq/atac_pbmc_1k/atac_pbmc_1k_nextgem_fastqs/atac_pbmc_1k_nextgem_S1_L001_R1_001.fastq.gz",
             "s3://gedac-bucket-dev/input/scatacseq/atac_pbmc_1k/atac_pbmc_1k_nextgem_fastqs/atac_pbmc_1k_nextgem_S1_L001_R2_001.fastq.gz",
             "s3://gedac-bucket-dev/input/scatacseq/atac_pbmc_1k/atac_pbmc_1k_nextgem_fastqs/atac_pbmc_1k_nextgem_S1_L001_R3_001.fastq.gz"
@@ -13,5 +15,10 @@
             "s3://gedac-bucket-dev/input/scatacseq/atac_pbmc_1k/atac_pbmc_1k_nextgem_fastqs/atac_pbmc_1k_nextgem_S1_L002_R2_001.fastq.gz",
             "s3://gedac-bucket-dev/input/scatacseq/atac_pbmc_1k/atac_pbmc_1k_nextgem_fastqs/atac_pbmc_1k_nextgem_S1_L002_R3_001.fastq.gz"
           ]
-        ]
-  }
+        ],
+      "sampleName": "pbmc",
+      "sampleType": "1k_full",
+      "cols":{}
+      }
+    ]
+}

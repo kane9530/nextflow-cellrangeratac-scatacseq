@@ -2,7 +2,7 @@ version 1.0
 import "modules/quantifyReads.wdl" as Count
 import "modules/dataStructures.wdl" 
 
-workflow scATACseq {
+workflow scatacseq {
 	input {
 		# base
 		String dockerBase
@@ -50,7 +50,6 @@ workflow scATACseq {
 		        sampleType=samplesType,
                 batch=batches,
                 fragments = Count.fragments,
-				fragments_tbi = Count.fragments_tbi,
                 singleCellCsv = Count.singleCellCsv,
                 dockerUri = dockerUri,
                 dockerMemoryGB =cellRangerMemory,
