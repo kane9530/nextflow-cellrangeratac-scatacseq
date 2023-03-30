@@ -9,8 +9,6 @@ include { scATACseqFlow } from './scatacseq-flow.nf'
     fastq_R3 <path>: S3 path to read2
     lane <string>: flow cell lane
 */   
-params.designCsv = "${baseDir}/design.csv"
-params.reference = "s3://gedac-bucket-dev/workflows/agc/scatacseq/ref/grch38/"
 
 log.info """\n
          s c A T A C - S E Q  P I P E L I N E    
