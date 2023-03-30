@@ -2,7 +2,7 @@ include {
   QC_FASTP               ;
   QC_MULTIQC             ;
   CELLRANGER_ATAC_COUNT  ;
- } from './modules/scatacseq-tasks.nf'  
+ } from './tasks/scatacseq-tasks.nf'  
 
 workflow scATACseqFlow {
     // required inputs
