@@ -1,0 +1,97 @@
+#!/usr/bin/env bash
+
+# Description: Bootstrapping script to submit WDL workflow files to AGC in Mani's account
+# Creator: Kane Toh
+# Last modified: 15/03/2023
+
+set -euox pipefail
+
+# Set default variables
+readonly DEFAULT_ZIP_NAME="agc_workflow.zip"
+readonly DEFAULT_S3_PATH="s3://gedac-bucket-dev/workflows/agc/scatacseq/"
+readonly DEFAULT_TEST_CONFIG_PATH="tests/tests_aws/pbmc1k_scrnaseq_grch38_kb.json"
+
+# Help                                                     
+Help()
+{
+   # Display Help
+   printf "Submit WDL workflow to AGC in Mani's account\n"
+   printf "Syntax: %s [-h|t|s|z]] \n" "$0"
+   printf "options:\n"
+   printf "h     Print this Help.\n"
+   printf "t     Specify the path to test config file (default: %s)\n" "${DEFAULT_TEST_CONFIG_PATH}"
+   printf "s     Specify the path to the s3 bucket that stores the zip folder (default: %s)\n" "${DEFAULT_S3_PATH}"
+   printf "z     Specify the name of the zip folder (default: %s)\n" "${DEFAULT_ZIP_NAME}"
+}
+
+# Main
+
+# Set default variables
+zip_name="${DEFAULT_ZIP_NAME}"
+s3_path="${DEFAULT_S3_PATH}"
+test_config_path="${DEFAULT_TEST_CONFIG_PATH}"
+
+# Process the input options. 
+while getopts ":ht:s:z:" option; do
+   case $option in
+      h) # display Help
+         Help
+         exit;;
+      t) # path to test config file 
+         test_config_path=$OPTARG;;
+      s) # path to test config file 
+         s3_path=$OPTARG;;
+      z) # path to test config file 
+         zip_name=$OPTARG;;
+     \?) # Invalid option
+         printf "Error: Invalid option"
+         Help
+         exit;;
+   esac
+done
+
+# Tests
+
+if [ -f "main.nf" ]; then
+    echo "-----Testing for main.nf-----" 
+    printf "main.nf workflow file exists.\n\n"
+else 
+    printf "workflow file must be named main.nf. Exiting...\n"
+    exit
+fi
+
+if [ -d "modules" ]; then
+    echo "---Testing for modules folder---" 
+    printf "Modules folder exists.\n\n"
+else 
+    printf "A Nextflow modules folder must be present. Exiting...\n"
+    exit
+fi
+
+# First, copy the test input_json to the directory
+echo "---Path to test config---" 
+printf "${test_config_path} \n\n"
+cp "${test_config_path}" . && mv "$(basename "${test_config_path}")" inputs.json
+
+# Next, zip all the required files into a folder called agc_workflow.zip
+echo "---Zip file name ---" 
+printf "${zip_name} \n\n"
+zip -r "${zip_name}" modules/ main.nf inputs.json options.json nextflow.config design.csv
+
+echo -e "\n---S3 bucket path ---" 
+printf "${s3_path} \n\n"
+
+# Remove the zip folder on s3 if it exists
+aws s3 rm "${s3_path}""${zip_name}"
+
+# Copy zip workflow folder to s3
+aws s3 cp "${zip_name}" "${s3_path}"
+printf "Successfully pushed zip folder to S3! Done!\n\n"   
+
+# Submit to AGC to mani's account
+curl -X POST \
+'https://68lv058g4j.execute-api.ap-southeast-1.amazonaws.com/prod/ga4gh/wes/v1/runs' \
+-H "Content-Type: application/x-www-form-urlencoded" \
+-d "workflow_type=WDL&workflow_type_version=1.1&workflow_url=${s3_path}${zip_name}" \
+--user AKIAQMF7QQWTZXI5I7OK:4alx7UKQZvXF1eCREaQJUNMk88clrZLiE1+T2Fwl \
+--aws-sigv4 "aws:amz:ap-southeast-1:execute-api"

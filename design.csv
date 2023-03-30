@@ -1,0 +1,4 @@
+sample_name,sample_type,fastq_R1,fastq_R2,fastq_R3,lane
+atac_pbmc_1k,control,s3://gedac-bucket-dev/tests/scatacseq/atac_pbmc_1k/atac_pbmc_1k_nextgem_S1_L001_R1_001.fastq.gz,s3://gedac-bucket-dev/tests/scatacseq/atac_pbmc_1k/atac_pbmc_1k_nextgem_S1_L001_R2_001.fastq.gz,s3://gedac-bucket-dev/tests/scatacseq/atac_pbmc_1k/atac_pbmc_1k_nextgem_S1_L001_R3_001.fastq.gz,L001
+atac_pbmc_1k,test,s3://gedac-bucket-dev/tests/scatacseq/atac_pbmc_1k/atac_pbmc_1k_nextgem_S1_L002_R1_001.fastq.gz,s3://gedac-bucket-dev/tests/scatacseq/atac_pbmc_1k/atac_pbmc_1k_nextgem_S1_L002_R2_001.fastq.gz,s3://gedac-bucket-dev/tests/scatacseq/atac_pbmc_1k/atac_pbmc_1k_nextgem_S1_L002_R3_001.fastq.gz,L002
+

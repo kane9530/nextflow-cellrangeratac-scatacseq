@@ -1,0 +1,15 @@
+---
+name: scatacseq
+schemaVersion: 1
+
+data:
+  - location: s3://gedac-bucket-dev/*
+    readOnly: false
+  - location: s3://agc-026171442599-ap-southeast-1/*
+
+contexts:
+  scatacseqspot:
+    requestSpotInstances: true
+    engines:
+      - type: nextflow
+        engine: nextflow

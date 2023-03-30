@@ -1,0 +1,4 @@
+{
+  "reference": "s3://gedac-bucket-dev/workflows/agc/scatacseq/ref/grch38/",
+  "outdir": "s3://gedac-bucket-dev/workflows/agc/scatacseq/grch38/results"
+}

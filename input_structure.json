@@ -1,7 +1,0 @@
-{
-    "scatacseq.uuid": "",
-    "scatacseq.dockerBase": "026171442599.dkr.ecr.ap-southeast-1.amazonaws.com/",
-    "scatacseq.dockerPrefix": "humangrch38",
-    "scatacseq.designMatrices": [
-    ]
-}

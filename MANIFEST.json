@@ -1,0 +1,8 @@
+{
+  "mainWorkflowURL": "main.nf",
+  "inputFileURLs": [
+    "inputs.json"
+  ],
+  "optionFileURL": "nextflow.config",
+  "engineOptions": "-resume"
+}
