@@ -1,6 +1,12 @@
 ---
 name: scatacseq
 schemaVersion: 1
+workflows:
+  scatacseq:
+    type:
+      language: nextflow
+      version: 2.0
+    sourceURL: scatacseq.zip
 
 data:
   - location: s3://gedac-bucket-dev/*
